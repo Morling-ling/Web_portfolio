@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Large design files (not suitable for GitHub)
+*.psd
+*.psb
+*.tif
+*.tiff
+*.RAF
+*.raw
+*.CR2
+*.NEF
+*.indd
+*.indb
+*.ai
+*.sketch
+
+# PDF source files (keep exported web-ready versions if needed)
+*.pdf
+
+# Node / build artifacts
+node_modules/
+dist/
+.env
+
+# Editor
+.vscode/
+.idea/

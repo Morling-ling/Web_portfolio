@@ -1,0 +1,409 @@
+body.cv-page {
+  --cv-red: #6c131a;
+  --cv-blue: #2c4a63;
+  background: #d8d3cb;
+}
+
+body.cv-page .site-header {
+  position: sticky;
+}
+
+.cv-main {
+  min-height: calc(100svh - 84px);
+  background: #d8d3cb;
+  display: grid;
+  place-items: center;
+  padding-block: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.cv-layout {
+  position: relative;
+  width: 100%;
+  min-height: clamp(28rem, 62vh, 36rem);
+  display: grid;
+  align-content: center;
+  gap: 1.55rem;
+}
+
+.cv-word {
+  margin: 0;
+  font-family: "Abril Fatface", serif;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cv-word--experience {
+  justify-self: end;
+  font-size: clamp(3rem, 10.6vw, 7.8rem);
+  color: rgba(108, 19, 26, 0.15);
+}
+
+.timeline-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.9rem;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeline {
+  position: relative;
+  width: var(--timeline-width, 100%);
+  min-width: var(--timeline-width, 100%);
+  min-height: 15.6rem;
+  display: grid;
+  grid-template-rows:
+    var(--experience-row-height, 5.8rem)
+    var(--year-row-height, 2rem)
+    var(--education-row-height, 6rem);
+  row-gap: var(--timeline-row-gap, 1.15rem);
+  align-content: center;
+}
+
+.timeline-track {
+  position: relative;
+}
+
+.timeline-track--experience {
+  grid-row: 1;
+  z-index: 4;
+}
+
+.timeline-track--education {
+  grid-row: 3;
+  z-index: 3;
+}
+
+.timeline-items {
+  position: relative;
+  width: 100%;
+}
+
+.timeline-item {
+  position: absolute;
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  min-width: var(--px-per-month, 14px);
+}
+
+.timeline-item:focus-visible {
+  outline: none;
+}
+
+.timeline-item h3 {
+  margin: 0;
+  width: fit-content;
+  padding: 0.15rem 0.28rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.35;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.timeline-item:hover h3,
+.timeline-item:focus-visible h3 {
+  border-color: color-mix(in srgb, var(--cv-red) 45%, transparent);
+  background: color-mix(in srgb, #fff 52%, transparent);
+}
+
+.timeline-item--education:hover h3,
+.timeline-item--education:focus-visible h3 {
+  border-color: color-mix(in srgb, var(--cv-blue) 45%, transparent);
+}
+
+.timeline-item--experience {
+  top: 0;
+  z-index: 4;
+  height: 1px;
+}
+
+.timeline-item--experience h3 {
+  position: absolute;
+  left: 0;
+  bottom: calc(0.65rem + 1px);
+  color: var(--cv-red);
+  max-width: 15ch;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.timeline-item--experience::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: 0;
+  height: 1px;
+  background: var(--cv-red);
+}
+
+.timeline-years {
+  grid-row: 2;
+  position: relative;
+  height: 2rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.timeline-year {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.timeline-year > span {
+  display: inline-block;
+  color: rgba(108, 19, 26, 0.78);
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timeline-item--education {
+  top: 0.85rem;
+  z-index: 3;
+}
+
+.timeline-item--education h3 {
+  color: var(--cv-blue);
+  white-space: nowrap;
+}
+
+.timeline-item--education::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.65rem;
+  height: 1px;
+  background: var(--cv-blue);
+}
+
+.cv-word--education {
+  justify-self: start;
+  margin-top: 0.4rem;
+  font-size: clamp(3.1rem, 10.2vw, 6.7rem);
+  color: rgba(44, 74, 99, 0.42);
+}
+
+body.cv-page.modal-open {
+  overflow: hidden;
+}
+
+.cv-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2.4rem);
+  background: rgba(32, 30, 32, 0.82);
+}
+
+.cv-modal[hidden] {
+  display: none;
+}
+
+.cv-modal-dialog {
+  width: min(96vw, 1120px);
+  max-height: min(88vh, 760px);
+  overflow: auto;
+  position: relative;
+  padding: clamp(1.25rem, 2.7vw, 2.1rem);
+  background: #f2f1ef;
+  border: 1px solid rgba(44, 30, 32, 0.16);
+}
+
+.cv-modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  border: 0;
+  background: transparent;
+  color: #1c1b1a;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cv-modal-grid {
+  display: grid;
+  grid-template-columns: minmax(17rem, 1fr) minmax(14rem, 1.2fr);
+  gap: clamp(1.1rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.cv-modal-text {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.cv-modal-title {
+  margin: 0;
+  color: var(--cv-red);
+  font-family: "Abril Fatface", serif;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.08;
+}
+
+.cv-modal-date {
+  margin: 0;
+  color: var(--cv-red);
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 1.05rem;
+}
+
+.cv-modal-subtitle,
+.cv-modal-location,
+.cv-modal-description {
+  margin: 0;
+  color: #1d1b1b;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.cv-modal-description {
+  white-space: pre-line;
+}
+
+.cv-modal-media {
+  min-height: 21rem;
+  display: grid;
+  align-items: stretch;
+  justify-items: stretch;
+  overflow: auto;
+  padding: 0.75rem;
+  border: 2px solid color-mix(in srgb, var(--cv-blue) 90%, white 10%);
+  background: #c8c8c8;
+}
+
+.cv-modal-dialog[data-entry-type="experience"] .cv-modal-title,
+.cv-modal-dialog[data-entry-type="experience"] .cv-modal-date {
+  color: var(--cv-red);
+}
+
+.cv-modal-dialog[data-entry-type="education"] .cv-modal-title,
+.cv-modal-dialog[data-entry-type="education"] .cv-modal-date {
+  color: var(--cv-blue);
+}
+
+.cv-modal-media-empty {
+  color: rgba(28, 27, 26, 0.82);
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.cv-modal-media-list {
+  width: 100%;
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+
+.cv-modal-media-item {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.6rem;
+  border: 1px solid rgba(44, 30, 32, 0.28);
+  border-radius: 8px;
+  background: rgba(242, 241, 239, 0.78);
+}
+
+.cv-modal-media-item-title {
+  margin: 0;
+  color: #1d1b1b;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.cv-modal-media-image {
+  width: 100%;
+  max-height: 15rem;
+  object-fit: contain;
+  border: 1px solid rgba(44, 30, 32, 0.2);
+  background: rgba(216, 211, 203, 0.62);
+}
+
+.cv-modal-media-pdf {
+  width: 100%;
+  height: 15rem;
+  border: 1px solid rgba(44, 30, 32, 0.2);
+  background: #f8f8f8;
+}
+
+.cv-modal-media-link {
+  width: fit-content;
+  color: var(--cv-red);
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  text-decoration: underline;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1000px) {
+  .cv-main {
+    min-height: calc(100vh - 74px);
+  }
+
+  .cv-word--experience {
+    font-size: clamp(2.7rem, 11vw, 5.8rem);
+  }
+}
+
+@media (max-width: 780px) {
+  .cv-layout {
+    min-height: auto;
+  }
+
+  .cv-word--education {
+    font-size: clamp(2.7rem, 14.5vw, 4.2rem);
+  }
+
+  .cv-modal-dialog {
+    width: min(96vw, 40rem);
+    max-height: 86vh;
+  }
+
+  .cv-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-modal-media {
+    min-height: 14rem;
+  }
+}

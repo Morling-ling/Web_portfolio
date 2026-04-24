@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Lena Gerken - CV timeline with education and experience overview."
+    >
+    <title>Lena Gerken | CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/animations.css">
+    <link rel="stylesheet" href="./assets/css/onepage.css">
+    <link rel="stylesheet" href="./assets/css/cv.css">
+    <script src="./assets/js/main.js" defer></script>
+    <script src="./assets/js/cv-timeline.js" defer></script>
+  </head>
+  <body class="cv-page">
+    <a class="skip-link" href="#cv-main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="./index.html#top">Lena Gerken</a>
+        <nav aria-label="Main">
+          <ul class="nav-list">
+            <li><a href="./index.html#about-details">About</a></li>
+            <li><a href="./index.html#works">Works</a></li>
+            <li><a href="./cv.html">CV</a></li>
+            <li><a href="./index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="cv-main" class="cv-main">
+      <section class="container cv-layout reveal" aria-labelledby="experience-title">
+
+        <h1 id="experience-title" class="cv-word cv-word--experience">Experience</h1>
+
+        <div class="timeline-scroll" aria-label="Horizontal CV timeline" tabindex="0">
+          <section
+            class="timeline"
+            id="cv-timeline"
+            data-px-per-month="28"
+            data-axis-start-year="2002"
+            data-axis-end-year="2027"
+          >
+            <div class="timeline-years" aria-hidden="true"></div>
+
+            <section class="timeline-track timeline-track--experience" aria-labelledby="experience-track-title">
+              <h2 id="experience-track-title" class="sr-only">Experience timeline entries</h2>
+              <div class="timeline-items" data-track="experience"></div>
+            </section>
+
+            <section class="timeline-track timeline-track--education" aria-labelledby="education-track-title">
+              <h2 id="education-track-title" class="sr-only">Education timeline entries</h2>
+              <div class="timeline-items" data-track="education"></div>
+            </section>
+          </section>
+        </div>
+
+        <p class="cv-word cv-word--education" aria-hidden="true">Education</p>
+      </section>
+
+      <div class="cv-modal" id="cv-modal" aria-hidden="true" hidden>
+        <section
+          class="cv-modal-dialog"
+          id="cv-modal-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cv-modal-title"
+        >
+          <button class="cv-modal-close" id="cv-modal-close" type="button" aria-label="Close popup">
+            ×
+          </button>
+
+          <div class="cv-modal-grid">
+            <div class="cv-modal-text">
+              <h2 class="cv-modal-title" id="cv-modal-title"></h2>
+              <p class="cv-modal-date" id="cv-modal-date"></p>
+              <p class="cv-modal-subtitle" id="cv-modal-subtitle"></p>
+              <p class="cv-modal-location" id="cv-modal-location"></p>
+              <p class="cv-modal-description" id="cv-modal-description"></p>
+            </div>
+
+            <div class="cv-modal-media" id="cv-modal-media" aria-label="Media and documents area"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
