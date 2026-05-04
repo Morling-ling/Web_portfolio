@@ -28,3 +28,9 @@ dist/
 # Editor
 .vscode/
 .idea/
+
+# Claude Code internal session state
+.claude/
+
+# Source composite files (not needed on the web)
+*.drx

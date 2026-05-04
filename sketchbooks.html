@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Lena Gerken — sketchbooks. Hover a volume to pull it from the shelf."
+    >
+    <title>Lena Gerken | Sketchbooks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/animations.css">
+    <link rel="stylesheet" href="./assets/css/onepage.css">
+    <link rel="stylesheet" href="./assets/css/sketchbooks.css">
+    <script src="./assets/js/main.js" defer></script>
+  </head>
+  <body class="sb-body">
+    <a class="skip-link" href="#sb-main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="./index.html#top">Lena Gerken</a>
+        <nav aria-label="Main">
+          <ul class="nav-list">
+            <li><a href="./index.html#about-details">About</a></li>
+            <li><a href="./index.html#works">Works</a></li>
+            <li><a href="./sketchbooks.html" aria-current="page">Sketchbook</a></li>
+            <li><a href="./cv.html">CV</a></li>
+            <li><a href="./index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="sb-main">
+
+      <!-- Shelf — the whole interaction lives here -->
+      <section class="shelf-section" aria-label="Sketchbook shelf">
+        <div class="shelf-wrap" id="shelf-wrap">
+
+          <!-- Base: shelf at rest, always underneath -->
+          <img
+            class="shelf-img shelf-base"
+            src="./assets/images/projects/Sketchbook/Sketchbook_shelve.png"
+            alt="A shelf holding all sketchbooks, spines facing outward."
+          >
+
+          <!-- Vol 1 pulled out -->
+          <img
+            class="shelf-img shelf-out"
+            id="shelf-out-1"
+            src="./assets/images/projects/Sketchbook/SKB_vol1_out.png"
+            alt="Sketchbook Vol. I pulled out from the shelf."
+            loading="eager"
+          >
+
+          <!-- Vol 2 pulled out -->
+          <img
+            class="shelf-img shelf-out"
+            id="shelf-out-2"
+            src="./assets/images/projects/Sketchbook/SKB_vol2_out.png"
+            alt="Sketchbook Vol. II pulled out from the shelf."
+            loading="eager"
+          >
+
+          <!-- Vol 3 pulled out -->
+          <img
+            class="shelf-img shelf-out"
+            id="shelf-out-3"
+            src="./assets/images/projects/Sketchbook/SKB_vol3_out.png"
+            alt="Sketchbook Vol. III pulled out from the shelf."
+            loading="eager"
+          >
+
+          <!-- Title overlaid on the image -->
+          <div class="shelf-title" aria-hidden="false">
+            <h1>Sketchbooks</h1>
+          </div>
+
+          <!-- Hotspots — hover previews, click opens flip-through -->
+          <button
+            type="button"
+            class="shelf-hotspot"
+            data-out="shelf-out-1"
+            data-label="Vol. I"
+            data-video="./assets/images/projects/Sketchbook/videos/SB_Vol.1_flip-through.mp4"
+            style="--hs-left: 36%; --hs-width: 6%;"
+            aria-label="Open Vol. I flip-through"
+          ></button>
+
+          <button
+            type="button"
+            class="shelf-hotspot"
+            data-out="shelf-out-2"
+            data-label="Vol. II"
+            data-video="./assets/images/projects/Sketchbook/videos/SB_Vol.2_flip-through.mp4"
+            style="--hs-left: 42%; --hs-width: 6%;"
+            aria-label="Open Vol. II flip-through"
+          ></button>
+
+          <button
+            type="button"
+            class="shelf-hotspot"
+            data-out="shelf-out-3"
+            data-label="Vol. III"
+            data-video="./assets/images/projects/Sketchbook/videos/SB_Vol.3_flip-through.mp4"
+            style="--hs-left: 48%; --hs-width: 7%;"
+            aria-label="Open Vol. III flip-through"
+          ></button>
+
+          <button
+            type="button"
+            class="shelf-hotspot"
+            data-label="Vol. IV"
+            data-video="./assets/images/projects/Sketchbook/videos/SB_Vol.4_flip-through.mp4"
+            style="--hs-left: 62%; --hs-width: 6%;"
+            aria-label="Open Vol. IV flip-through"
+          ></button>
+
+          <!-- Volume label — appears on hover -->
+          <div class="shelf-label" id="shelf-label" aria-hidden="true">
+            <span class="shelf-label-text" id="shelf-label-text"></span>
+          </div>
+
+          <!-- Idle hint -->
+          <p class="shelf-hint" id="shelf-hint" aria-hidden="true">
+            Hover a volume · click to open
+          </p>
+
+        </div>
+      </section>
+
+      <!-- Video modal -->
+      <div
+        class="video-modal"
+        id="video-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="video-modal-title"
+        aria-hidden="true"
+      >
+        <div class="video-modal-backdrop" data-modal-close></div>
+
+        <div class="video-modal-dialog" role="document">
+          <div class="video-modal-header">
+            <p class="kicker" id="video-modal-title">Flip-through</p>
+            <button
+              type="button"
+              class="video-modal-close"
+              data-modal-close
+              aria-label="Close video"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <div class="video-modal-stage">
+            <video
+              class="video-modal-video"
+              id="video-modal-video"
+              controls
+              preload="metadata"
+              playsinline
+            ></video>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <script>
+      (function () {
+        const wrap     = document.getElementById('shelf-wrap');
+        if (!wrap) return;
+        const hotspots = Array.from(wrap.querySelectorAll('.shelf-hotspot'));
+        const outs     = Array.from(wrap.querySelectorAll('.shelf-out'));
+        const label    = document.getElementById('shelf-label');
+        const labelTxt = document.getElementById('shelf-label-text');
+        const hint     = document.getElementById('shelf-hint');
+
+        if (!hotspots.length) return;
+
+        // Pre-decode all out images so the first hover is instant
+        outs.forEach(img => {
+          if (img.decode) img.decode().catch(() => {});
+        });
+
+        let hintDismissed = false;
+
+        function showOut(id, text) {
+          outs.forEach(o => o.classList.remove('is-visible'));
+          const target = document.getElementById(id);
+          if (target) target.classList.add('is-visible');
+          if (labelTxt) labelTxt.textContent = text || '';
+          if (label) label.classList.add('is-visible');
+        }
+
+        function reset() {
+          outs.forEach(o => o.classList.remove('is-visible'));
+          if (label) label.classList.remove('is-visible');
+        }
+
+        // ---- Video modal ----
+        const modal       = document.getElementById('video-modal');
+        const modalTitle  = document.getElementById('video-modal-title');
+        const modalVideo  = document.getElementById('video-modal-video');
+        const modalCloses = modal ? modal.querySelectorAll('[data-modal-close]') : [];
+
+        let lastFocus = null;
+
+        function openModal(videoSrc, title) {
+          if (!modal || !modalVideo) return;
+          lastFocus = document.activeElement;
+          modalTitle.textContent = title ? `Flip-through · ${title}` : 'Flip-through';
+          modalVideo.src = videoSrc;
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('modal-open');
+          // Try to autoplay; will fall back gracefully if blocked
+          const playPromise = modalVideo.play();
+          if (playPromise && playPromise.catch) playPromise.catch(() => {});
+        }
+
+        function closeModal() {
+          if (!modal || !modalVideo) return;
+          modalVideo.pause();
+          modalVideo.removeAttribute('src');
+          modalVideo.load();
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+          if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }
+
+        modalCloses.forEach(el => el.addEventListener('click', closeModal));
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+            closeModal();
+          }
+        });
+
+        // ---- Hotspot interactions ----
+        hotspots.forEach(hs => {
+          hs.addEventListener('mouseenter', () => {
+            if (!hintDismissed) {
+              hintDismissed = true;
+              if (hint) hint.classList.add('is-gone');
+            }
+            showOut(hs.dataset.out, hs.dataset.label);
+          });
+
+          hs.addEventListener('focus', () => {
+            showOut(hs.dataset.out, hs.dataset.label);
+          });
+
+          hs.addEventListener('blur', reset);
+
+          hs.addEventListener('click', () => {
+            const videoSrc = hs.dataset.video;
+            if (videoSrc) {
+              openModal(videoSrc, hs.dataset.label);
+            }
+          });
+        });
+
+        wrap.addEventListener('mouseleave', reset);
+      })();
+    </script>
+  </body>
+</html>

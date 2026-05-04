@@ -124,6 +124,21 @@ p {
   color: var(--text-primary);
 }
 
+.nav-list a.is-active {
+  color: var(--text-primary);
+  position: relative;
+}
+
+.nav-list a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--text-primary);
+}
+
 main {
   padding-top: 0;
 }
@@ -526,6 +541,44 @@ body.modal-open {
 
 .project-modal-thumb.is-active {
   border-color: var(--depth);
+}
+
+.site-footer {
+  background: var(--depth);
+  color: rgba(243, 237, 228, 0.5);
+  padding-block: var(--space-md);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.footer-wrap span {
+  margin: 0;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer a {
+  color: rgba(243, 237, 228, 0.5);
+  transition: color 180ms ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: rgba(243, 237, 228, 0.9);
 }
 
 @media (max-width: 900px) {

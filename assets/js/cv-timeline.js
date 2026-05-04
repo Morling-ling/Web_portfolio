@@ -88,7 +88,7 @@
       {
         id: "exp-tutor-student-assistant-2024-a",
         type: "experience",
-        title: "Tutor\n& Student Assistant",
+        title: "Tutor &\nStudent Assistant",
         subtitle: "Hochschule Mannheim",
         date: "01.04.2024 - 31.08.2024",
         location: "Mannheim, Germany",
@@ -316,12 +316,12 @@
 
   const renderMedia = (entry) => {
     modalMedia.innerHTML = "";
+    modalMedia.classList.remove("cv-modal-media--empty");
+    modalDialog.classList.remove("cv-modal-dialog--no-media");
 
     if (!entry.media || !entry.media.length) {
-      const empty = document.createElement("div");
-      empty.className = "cv-modal-media-empty";
-      empty.textContent = "Media / Documents";
-      modalMedia.append(empty);
+      modalMedia.classList.add("cv-modal-media--empty");
+      modalDialog.classList.add("cv-modal-dialog--no-media");
       return;
     }
 
@@ -495,7 +495,8 @@
     container: experienceContainer,
     entries: cvTimelineData.experience,
     itemClass: "timeline-item--experience",
-    laneStep: experienceLaneStep
+    laneStep: experienceLaneStep,
+    trackOffset: 60
   });
 
   const educationRowHeight = renderTrack({

@@ -560,11 +560,47 @@
     });
   };
 
+  const initNavActiveState = () => {
+    const sections = [
+      { id: "about-details", href: "#about-details" },
+      { id: "works",         href: "#works" },
+      { id: "contact",       href: "#contact" }
+    ];
+
+    const navLinks = sections.map(({ href }) =>
+      document.querySelector(`.nav-list a[href="${href}"]`)
+    );
+
+    const setActive = (activeHref) => {
+      navLinks.forEach((link) => {
+        if (!link) return;
+        link.classList.toggle("is-active", link.getAttribute("href") === activeHref);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(`#${entry.target.id}`);
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  };
+
   initAboutReveal();
   initProjectFlip();
   initAboutCtaScroll();
   initNavScrollBehavior();
   initProjectModal();
+  initNavActiveState();
 
   const form = document.querySelector("#contact-form");
   const statusEl = document.querySelector("#form-status");

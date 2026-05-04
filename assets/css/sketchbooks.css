@@ -1,0 +1,284 @@
+/* ============================================================
+   Sketchbooks page — shelf only, title overlaid on image
+   ============================================================ */
+
+/* Page fills the viewport, no scroll bleed below the shelf */
+.sb-body {
+  overflow-x: hidden;
+}
+
+/* ---- Shelf section ---- */
+
+.shelf-section {
+  background: #1a1210;
+}
+
+.shelf-wrap {
+  position: relative;
+  width: 100%;
+  /* Lock to the source image's 16:9 ratio so all four images
+     overlay pixel-perfectly */
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* All four images share the same box; out states fade in on top */
+.shelf-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.shelf-base {
+  z-index: 1;
+}
+
+.shelf-out {
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.shelf-out.is-visible {
+  opacity: 1;
+}
+
+/* ---- Title overlay ---- */
+
+.shelf-title {
+  position: absolute;
+  top: clamp(1.25rem, 3.5vw, 2.75rem);
+  left: clamp(1.5rem, 4vw, 3rem);
+  z-index: 20;
+  pointer-events: none;
+  max-width: 60%;
+}
+
+.shelf-title h1 {
+  margin: 0;
+  font-family: "Abril Fatface", serif;
+  color: var(--text-primary);
+  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+}
+
+/* ---- Hotspots ---- */
+
+.shelf-hotspot {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: var(--hs-left);
+  width: var(--hs-width);
+  z-index: 10;
+  cursor: grab;
+}
+
+.shelf-hotspot:active {
+  cursor: grabbing;
+}
+
+/* ---- Volume label (bottom-left when a book is out) ---- */
+
+.shelf-label {
+  position: absolute;
+  bottom: clamp(1rem, 3vw, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  z-index: 25;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+  pointer-events: none;
+}
+
+.shelf-label.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shelf-label-text {
+  display: inline-block;
+  font-family: "Abril Fatface", serif;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: #f7f2eb;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+}
+
+/* ---- Idle hint (bottom-right) ---- */
+
+.shelf-hint {
+  position: absolute;
+  bottom: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  z-index: 25;
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(247, 242, 235, 0.6);
+  pointer-events: none;
+  transition: opacity 400ms ease;
+  max-width: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.shelf-hint.is-gone {
+  opacity: 0;
+}
+
+/* ---- Hotspot button reset ---- */
+
+button.shelf-hotspot {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  outline: none;
+}
+
+button.shelf-hotspot:focus-visible {
+  outline: 2px dashed rgba(247, 242, 235, 0.7);
+  outline-offset: -6px;
+}
+
+/* ---- Video modal ---- */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.video-modal.is-open {
+  display: flex;
+  animation: video-modal-in 220ms var(--ease-standard) both;
+}
+
+@keyframes video-modal-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 12, 12, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.video-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1440px);
+  max-height: calc(100svh - clamp(1.5rem, 4vw, 2.5rem));
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: clamp(0.6rem, 1.4vw, 1rem);
+  background: var(--depth);
+  border: 1px solid rgba(247, 242, 235, 0.12);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  padding: clamp(0.85rem, 2vw, 1.25rem);
+  animation: video-modal-rise 320ms var(--ease-standard) both;
+}
+
+@keyframes video-modal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: clamp(0.4rem, 1vw, 0.6rem);
+  border-bottom: 1px solid rgba(247, 242, 235, 0.12);
+}
+
+.video-modal-header .kicker {
+  margin: 0;
+  color: rgba(247, 242, 235, 0.78);
+}
+
+.video-modal-close {
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(247, 242, 235, 0.35);
+  border-radius: 999px;
+  color: #f7f2eb;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.video-modal-close:hover,
+.video-modal-close:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--depth);
+  transform: rotate(90deg);
+}
+
+.video-modal-stage {
+  position: relative;
+  background: #000;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.video-modal-video {
+  width: 100%;
+  height: auto;
+  max-height: calc(100svh - clamp(6rem, 11vw, 8rem));
+  display: block;
+  background: #000;
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .shelf-out,
+  .shelf-label {
+    transition: none;
+  }
+}
